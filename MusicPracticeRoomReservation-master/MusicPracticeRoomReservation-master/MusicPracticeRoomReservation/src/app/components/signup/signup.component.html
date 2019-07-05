@@ -1,0 +1,171 @@
+<div class="container content">
+  <div class="row">
+    <div class="col-lg-2 col-sm-2"></div>
+    <div class="col-lg-8 col-sm-8">
+      <h2 class="margin-top-sm">สมัครสมาชิก</h2>
+      <p class="text-muted">1 อีเมลต่อ 1 ผู้ใช้งาน</p>
+
+      <form class="row margin-top-lg"  (ngSubmit)="onSubmit()" #f="ngForm" >
+        <div class="col-12">
+            <div class="form-group">
+                <label for="email">อีเมล:</label>
+                <input  type="email" 
+                        class="form-control input-lg" 
+                        id="email"
+                        name="email"
+                        ngModel
+                        #email="ngModel"
+                        minlength="4"
+                        required
+                        email> 
+                        <span class="help-block" *ngIf="!email.valid && email.touched">โปรดระบุอีเมล Ex. john@gmail.com</span>
+              </div>
+        </div>
+        <div class="col-lg-6 col-sm-6">
+            <div class="form-group">
+                <label>รหัสผ่าน:</label>
+                <input  type="password" 
+                        class="form-control input-lg" 
+                        id="password"
+                        name="password"
+                        ngModel
+                        #password="ngModel"
+                        required>
+                        <span class="help-block" *ngIf="!password.valid && password.touched">โปรดระบุรหัสผ่าน </span>
+                        
+              </div>
+        </div>
+        <div class="col-lg-6 col-sm-6">
+          <div class="form-group">
+            <label>ยืนยันรหัสผ่าน:</label>
+            <input  type="password" 
+                    class="form-control input-lg" 
+                    id="confirmpassword"
+                    name="confirmpassword"
+                    appConfirmEqualValidator="password"
+                    ngModel
+                    #confirmpassword="ngModel"
+                    required>
+                    <span class="help-block" *ngIf="confirmpassword.errors?.required && confirmpassword.touched">
+                      โปรดระบุรหัสผ่าน 
+                    </span>
+                    <span class="help-block" *ngIf="confirmpassword.touched && confirmpassword.errors?.notEqual">
+                        ยืนยันรหัสผ่านไม่ตรงกันโปรดตรวจสอบ
+                    </span>   
+          </div>
+        </div>
+        <div class="col-lg-6 col-sm-6">
+          <div class="form-group">
+            <label>ชื่อ:</label>
+            <input  type="text" 
+                    class="form-control input-lg" 
+                    id="firstname"
+                    name="firstname"
+                    ngModel
+                    #firstname="ngModel"
+                    required>
+                    <span class="help-block" *ngIf="!firstname.valid && firstname.touched">โปรดระบุชื่อ </span>
+          </div>
+        </div>
+        <div class="col-lg-6 col-sm-6">
+          <div class="form-group">
+            <label>นามสกุล:</label>
+            <input  type="text" 
+                    class="form-control input-lg" 
+                    id="lastname"
+                    name="lastname"
+                    ngModel
+                    #lastname="ngModel"
+                    required>
+                    <span class="help-block" *ngIf="!lastname.valid && lastname.touched">โปรดระบุนามสกุล </span>
+          </div>
+        </div>
+        <div class="col-lg-6 col-sm-6">
+          <div class="form-group">
+            <label>เพศ:</label>
+            <select class="form-control input-lg" 
+                    id="gender"
+                    name="gender"
+                    [ngModel]="defualtGender"
+                    #gender="ngModel"
+                    required>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+            </select>
+            <span class="help-block" *ngIf="!gender.valid && gender.touched">Please select a valid gender</span>
+          </div>
+        </div>
+        <div class="col-lg-6 col-sm-6">
+          <div class="form-group">
+            <label>ที่อยู่:</label>
+            <input  type="text" 
+                    class="form-control input-lg"
+                    id="address"
+                    name="address"
+                    ngModel 
+                    #address="ngModel"
+                    required>
+                    <span class="help-block" *ngIf="!address.valid && address.touched">โปรดระบุที่อยู่</span>
+          </div>
+        </div>
+        <div class="col-lg-6 col-sm-6">
+          <label>วันเกิด:</label>
+          <div class="form-group">
+            <div class="input-group ">
+              <input  class="form-control input-lg" 
+                      placeholder="yyyy-mm-dd" 
+                      name="dp" 
+                      [ngModel]="model" 
+                      ngbDatepicker
+                      [footerTemplate]="footerTemplate" 
+                      #d="ngbDatepicker" 
+                      [minDate]="{year: 1950, month: 1, day: 1}"
+                      [maxDate]="today"
+                      required>
+                      <!-- <span class="help-block" *ngIf="!dp.valid && dp.touched">Please select a valid birthday</span> -->
+              <div class="input-group-append">
+                <button class="btn btn-outline-secondary btn-lg calendar fa fa-calendar" (click)="d.toggle()" type="button"></button>
+              </div>
+            </div>
+            <span class="help-block" *ngIf="!d.valid && d.touched">Please enter a valid date</span>
+          </div>
+          <ng-template #footerTemplate>
+            <hr class="my-0">
+            <button class="btn btn-primary btn-sm m-2 float-left" (click)="model = today; d.close()">Today</button>
+            <button class="btn btn-secondary btn-sm m-2 float-right" (click)="d.close()">Close</button>
+          </ng-template>
+          <!-- <hr />
+          <pre>Model: {{ model | json }}</pre> -->
+        </div>
+        <div class="col-lg-6 col-sm-6">
+          <div class="form-group">
+            <label>เบอร์โทรศัพท์:</label>
+            <input  type="text" 
+                    class="form-control input-lg" 
+                    id="tel"
+                    name="tel"
+                    ngModel 
+                    #tel="ngModel"
+                    pattern="^[0-9_-]{8,15}$"
+                    required
+                    >
+                    <span class="help-block" *ngIf="!tel.valid && tel.touched">โปรดระบุเบอร์ Ex.08xxxxxxxx</span>
+          </div>
+        </div>
+        <div class="col-lg-12 col-sm-12">
+          <button   type="submit" 
+                    class="btn btn-primary btn-lg" 
+                    [disabled]="!f.valid">สมัครสมาชิก</button>
+          <!-- <button class="btn btn-primary" type="submit">
+            <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> ลงทะเบียน
+          </button> -->
+        </div>
+      </form>
+
+      <hr>
+      <p class="lead text-center">Already have an account? <a routerLink="/login"
+          class="btn btn-secondary btn-lg">เข้าสู่ระบบ <i class="fas fa-sign-out-alt"></i></a></p>
+    </div>
+    <div class="col-lg-2 col-sm-2"></div>
+  </div>
+</div>

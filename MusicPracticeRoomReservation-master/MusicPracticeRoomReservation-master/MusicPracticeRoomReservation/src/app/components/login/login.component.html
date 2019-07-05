@@ -1,0 +1,33 @@
+<div class="container content">
+  <div class="row">
+    <div class="col-lg-4 col-sm-3"></div>
+    <div class="col-lg-4 col-sm-6">
+      <h2 class="margin-top-sm">เข้าสู่ระบบ</h2>
+      <p class="text-muted">เข้าสู่ระบบเพื่อการจอง</p>
+      <form class="margin-top-lg" (ngSubmit)="onSubmit()" #f="ngForm">
+        <div class="form-group">
+          <label>อีเมล:</label>
+          <input  type="email" 
+                  class="form-control input-lg" 
+                  name="email"
+                  ngModel
+                  #email="ngModel" 
+                  required>
+        </div>
+        <div class="form-group">
+          <label>รหัสผ่าน:</label>
+          <input  type="password" 
+                  class="form-control input-lg" 
+                  name="password"
+                  ngModel
+                  #password="ngModel"  
+                  required>
+        </div>
+        <button class="btn btn-primary btn-lg" name="submit-login" type="submit">เข้าสู่ระบบ</button>
+      </form>
+      <hr>
+      <p class="lead text-center">No account yet? <a routerLink="/signup" class="btn btn-secondary btn-lg">สมัครสมาชิก <i class="fas fa-pencil-alt"></i></a></p>
+    </div>
+    <div class="col-lg-4 col-sm-3"></div>
+  </div>
+</div>   

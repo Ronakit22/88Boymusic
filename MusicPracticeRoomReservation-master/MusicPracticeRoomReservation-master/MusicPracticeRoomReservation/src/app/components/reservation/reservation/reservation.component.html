@@ -1,0 +1,62 @@
+<br>
+<div class="container">
+  <h3>สถานะการจอง</h3>
+  <hr>
+  <div class="bank-payment text-center">
+    <img src="https://i0.wp.com/www.myshineyhineythailand.com/wp-content/uploads/2019/01/scb-icon.png" style="width: 100px;height : 100px;" alt="scb-icon">
+    <h4>7692648981</h4>
+    <h4>นายยุทธชัย คำโต</h4>
+    <h4>ธนาคารไทยพาณิชย์</h4>
+  </div>
+  <div class="col-12" *ngFor="let reserve of reservations; let i=index">
+    <div class="card">
+      <div class="card-header text-center">
+        <h3 class="first">สถานะ</h3>
+        <p-steps [model]="items" [(activeIndex)]="+reserve.reserve_status" styleClass="different"></p-steps>
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">ผู้จอง : <span>{{reserve.user_name}} </span> id : <span>{{reserve.user_id}}</span></h5>
+        <div class="row">
+          <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+            วันที่จอง : <span>{{reserve.date}}</span>
+          </div>
+          <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+            เวลาจอง : <span>{{reserve.time}}</span>
+          </div>
+          <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+            ห้องจอง : <span>{{reserve.room_name}}</span>
+          </div>
+          <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+            จำนวนเงินที่ต้องชำระ : <span>{{reserve.totalprice}} บาท</span>
+          </div>
+          <div class="col-12" *ngIf="reserve.reserve_status == 0 && role !='a'">
+            หลักฐานการชำระเงิน :
+            <input #file type="file" accept='image/*' (change)="preview(file.files)">
+          </div>
+          <div class="col-12" *ngIf="reserve.reserve_status != 0">
+            หลักฐานการชำระเงิน :
+            <div style="text-align: center">
+              <img src={{payment_img[i]}}  class="card-img payment_img" >
+            </div>
+          </div>
+          <div class="col-12" *ngIf="reserve.reserve_status == 1 && role == 'a'">
+            <hr>
+            <button type="button" class="btn btn-success btn-lg col-12"
+              (click)="confirmPayment(reserve)"><i class="fas fa-check-double"></i> ยืนยัน</button>
+          </div>
+          <div class="col-12" *ngIf="reserve.reserve_status == 0 && role !='a'">
+            <hr>
+            <button type="button" class="btn btn-success btn-lg col-12" [disabled]="!addimage_status"
+              (click)="onUploadPayment(reserve)"><i class="fas fa-cloud-upload-alt"></i> อัพโหลด</button>
+          </div>
+          <div class="col-12" *ngIf="reserve.reserve_status == 2 && role !='a'">
+            <hr>
+            <button type="button" class="btn btn-success btn-lg col-12" ><a href="http://localhost:8081/reservation/bill/bill{{reserve.id}}.pdf" style="color: white"><i class="fas fa-cloud-upload-alt"></i> ดาวโหลดใบเสร็จ</a></button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br>
+  </div>
+
+</div>

@@ -1,0 +1,7 @@
+.btn-secondary{
+    background-color: whitesmoke;
+    color: black;
+}
+.btn-secondary:hover{
+    background-color: #7b8799;
+}

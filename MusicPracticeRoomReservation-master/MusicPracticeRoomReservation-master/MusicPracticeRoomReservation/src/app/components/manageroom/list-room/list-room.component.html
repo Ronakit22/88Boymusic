@@ -1,0 +1,30 @@
+<br>
+<div class="container">
+  <div class="row">
+    <div class="col-5">
+      <h3>จัดการห้องซ้อม</h3>
+    </div>
+    <div class="col-2"></div>
+    <div class="col-5">
+      <a [routerLink]="['edit']"><button type="button" class="btn btn-success btn-lg col-12"><i class="fas fa-plus"></i> เพิ่มห้องซ้อม</button></a>
+    </div>
+  </div>
+  <hr>
+  <div class="col-12">
+    <div *ngFor="let bt of rooms; let i=index" class="card bg-dark text-white">
+      <a [routerLink]="['edit', bt.id]">
+        <img src={{banner_room[i]}} class="card-img">
+        <div class="card-img-overlay ">
+          <div class="col-md-4 offset-md-4">
+            <div class="bkt-img-content align-middle ">
+              <h5 class="card-title">{{bt.name}}</h5>
+              <p class="card-text">{{bt.price}}</p>
+            </div>
+          </div>
+        </div>
+      </a>
+    </div>
+    <br>
+  </div>
+
+</div>

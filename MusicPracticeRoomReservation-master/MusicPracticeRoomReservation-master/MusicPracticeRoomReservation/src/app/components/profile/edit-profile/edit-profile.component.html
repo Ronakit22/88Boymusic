@@ -1,0 +1,146 @@
+<br>
+<div class="container">
+  <div class="head">
+    <h3>เเก้ไขข้อมูลส่วนตัว</h3>
+    <hr>
+  </div>
+  <div class="row">
+
+    <div class="col-12 col-sm-12 col-md-4 col-lg-4">
+      <div class="text-center">
+        <span style="color:red;" *ngIf="message">{{message}}</span>
+        <img [src]="imgURL" class="avatar img-circle img-thumbnail"
+          alt="avatar">
+        <h6>อัพโหลดรูปภาพ</h6>
+        <input #file type="file" accept='image/*' (change)="preview(file.files)" class="text-center center-block file-upload">
+      </div>
+      <hr><br>
+    </div>
+
+    <div class="col-12 col-sm-12 col-md-8 col-lg-8">
+      <form class="form" id="registrationForm"  (ngSubmit)="onSubmit()" #f="ngForm">
+        
+        <div class="form-group">
+          <div class="col-xs-6">
+            <label for="first_name">
+              <h4>ชื่อ</h4>
+            </label>
+            <input  type="text" 
+                    class="form-control" 
+                    name="firstname" 
+                    id="firstname" 
+                    [ngModel]="user.firstname"
+                    #firstname="ngModel"
+                    required
+                   >
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-xs-6">
+            <label for="last_name">
+              <h4>นามสกุล</h4>
+            </label>
+            <input  type="text" 
+                    class="form-control" 
+                    name="lastname" 
+                    id="lastname" 
+                    [ngModel]="user.lastname"
+                    #lastname="ngModel"
+                    required
+                    >
+          </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-xs-6">
+              <label for="address">
+                <h4>ที่อยู่</h4>
+              </label>
+              <input  type="text" 
+                      class="form-control" 
+                      name="address" 
+                      id="address" 
+                      [ngModel]="user.address"
+                      #address="ngModel"
+                      required
+                      >
+            </div>
+          </div>
+
+          <div class="form-group">
+              <div class="col-xs-6">
+                <label for="tel">
+                  <h4>เบอร์โทรศัพท์</h4>
+                </label>
+                <input  type="text" 
+                        class="form-control" 
+                        name="tel" 
+                        id="tel" 
+                        [ngModel]="user.tel"
+                        #tel="ngModel"
+                        required
+                        >
+              </div>
+            </div>
+
+          <div class="form-group">
+            <div class="col-xs-6">
+              <label for="email">
+                <h4>อีเมล</h4>
+              </label>
+              <input  type="email" 
+                      class="form-control" 
+                      name="email" 
+                      id="email" 
+                      [ngModel]="user.email"
+                      #email="ngModel"
+                      required
+                      >
+            </div>
+          </div>
+
+          <!-- <div class="form-group">
+              <div class="col-xs-6">
+                <label for="newpassword">
+                  <h4>NewPassword</h4>
+                </label>
+                <input  type="password" 
+                        class="form-control" 
+                        name="newpassword" 
+                        id="newpassword" 
+                        placeholder="newpassword"
+                        title="enter your newpassword.">
+              </div>
+            </div>
+
+          <div class="form-group">
+            <div class="col-xs-6">
+              <label for="password">
+                <h4>Password</h4>
+              </label>
+              <input  type="password" 
+                      class="form-control" 
+                      name="password" 
+                      id="password" 
+                      placeholder="password"
+                      title="enter your password.">
+            </div>
+          </div> -->
+
+          <div class="form-group">
+            <div class="col-xs-12">
+              <br>
+              <button class="btn btn-lg btn-success" 
+                      type="submit"
+                      [disabled]="!f.valid">
+                      <i class="glyphicon glyphicon-ok-sign"></i>
+                บันทึก</button>
+              <button class="btn btn-lg" type="reset"><i class="glyphicon glyphicon-repeat"></i> รีเซ็ต</button>
+            </div>
+          </div>
+          
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,110 @@
+<br>
+<div class="container">
+  <div class="col-12">
+    <h3>แก้ไขห้องซ้อมดนตรี</h3>
+  </div>
+  <hr>
+  <div class="row">
+
+    <div class="col-12 col-sm-12 col-md-4 col-lg-4">
+      <div class="text-center">
+        <h5>รูปหลัก</h5>
+        <img src="{{img_banner}}" class="avatar img-circle img-thumbnail" alt="avatar"
+          style="max-height: 100px; max-width: 100px;">
+        <input #files type="file" accept='image/*' (change)="previewbanner(files.files)"
+          class="text-center center-block file-upload">
+      </div>
+      <hr><br>
+      <div class="text-center">
+        <h5>รูปรอง</h5>
+        <div *ngFor="let img of img_list; let i=index">
+            <img src="{{img}}" class="avatar img-circle img-thumbnail" alt="avatar"
+            style="max-height: 100px; max-width: 100px;">
+        </div>
+        <hr>
+        <h5>เพิ่มรูปใหม่</h5>
+        <img [src]="newimg_list" class="avatar img-circle img-thumbnail" alt="avatar"
+          style="max-height: 100px; max-width: 100px;">
+        <input #file type="file" accept='image/*' (change)="previewimg(file.files)"
+          class="text-center center-block file-upload">
+        <button *ngIf="id" type="button" class="btn btn-danger" (click)="deleteImg()">ลบรูปทั้งหมด</button>
+      </div>
+      <hr><br>
+    </div>
+
+    <div class="col-12 col-sm-12 col-md-8 col-lg-8">
+      <form class="form" id="registrationForm" (ngSubmit)="onSubmit()" #f="ngForm">
+
+        <div class="form-group">
+          <div class="col-xs-6">
+            <label for="name">
+              <h4>ชื่อห้อง :</h4>
+            </label>
+            <input type="text" class="form-control" name="name" id="name" [ngModel]="edit_room.name" #name="ngModel" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-xs-6">
+            <label for="type">
+              <h4>ชนิด/ขนาดห้อง :</h4>
+            </label>
+            <select class="form-control input-lg" 
+                    id="type"
+                    name="type"
+                    [ngModel]="edit_room.type"
+                    #type="ngModel"
+                    required>
+              <option value="L">L</option>
+              <option value="M">M</option>
+              <option value="S">S</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-xs-6">
+            <label for="price">
+              <h4>ราคา :</h4>
+            </label>
+            <input type="text" class="form-control" name="price" id="price" [ngModel]="edit_room.price" #price="ngModel" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-xs-6">
+            <label for="mus_instrument">
+              <h4>เครื่องดนตรี :</h4>
+            </label>
+            <input type="text" class="form-control" name="mus_instrument" id="mus_instrument" [ngModel]="edit_room.mus_instrument" #mus_instrument="ngModel" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-xs-6">
+            <label for="detail">  
+              <h4>รายละเอียดห้อง :</h4>
+            </label>
+            <input type="email" class="form-control" name="detail" id="detail" [ngModel]="edit_room.detail" #detail="ngModel" required>
+          </div>
+        </div>
+
+       
+        <div class="form-group">
+          <div class="col-xs-12">
+            <br>
+            <button class="btn btn-lg btn-success" type="submit" [disabled]="!f.valid">
+              <i class="fas fa-share"></i>
+              บันทึก
+            </button>&nbsp;
+            <button class="btn btn-lg btn-primary" type="reset"><i class="fas fa-undo"></i> รีเซ็ต</button>&nbsp;
+            <button class="btn btn-lg btn-danger" type="button" (click)="deleteRoom()"><i class="fas fa-trash-restore-alt"></i> ลบ</button>
+          </div>
+        </div>
+
+      </form>
+    </div>
+  </div>
+
+
+</div>

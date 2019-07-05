@@ -1,0 +1,37 @@
+<br>
+<div class="container">
+  <h3>จัดการผู้ใช้งาน</h3>
+  <hr>
+  <p-table #dt [columns]="cols" [value]="user_list" [paginator]="true" [rows]="20" [responsive]="true" class="text-center">
+    <ng-template pTemplate="caption">
+      <div class="ui-helper-clearfix">
+        <button type="button" class="btn btn-primary" (click)="dt.exportCSV()" style="float:left"><i
+            class="far fa-file-excel"></i> รายงาน</button>
+        <div style="text-align: right">
+          <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+          <input type="text" pInputText size="50" placeholder="Global Filter"
+            (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:50%">
+        </div>
+      </div>
+    </ng-template>
+    <ng-template pTemplate="header" let-columns>
+      <tr>
+        <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+          {{col.header}}
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-record let-columns="columns">
+      <tr>
+        <td *ngFor="let col of columns" [class.selected]="record.user_status == 0">  
+          <span class="ui-column-title">{{col.header}}</span>
+            {{record[col.field]}}
+          <span *ngIf="col.field == 'ban'">
+            <button type="button" class="btn btn-success" (click)="unbanUser(record)"><i class="fas fa-wrench"></i></button>&nbsp;
+            <button type="button" class="btn btn-danger" (click)="banUser(record)"><i class="fas fa-trash-alt"></i></button>
+          </span>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>

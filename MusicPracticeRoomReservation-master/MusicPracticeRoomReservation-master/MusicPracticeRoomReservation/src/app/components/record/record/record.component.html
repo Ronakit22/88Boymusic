@@ -1,0 +1,52 @@
+<br>
+<!-- <div class="container"> -->
+<div class="container-fluid">
+  <h3>ประวัติการจอง</h3>
+  <hr>
+  <p-table #dt [columns]="cols" [value]="reservation_records" [paginator]="true" [rows]="10" [responsive]="true">
+    <ng-template pTemplate="caption">
+      <div class="ui-helper-clearfix">
+        <button type="button" class="btn btn-primary" (click)="dt.exportCSV()" style="float:left"><i
+            class="far fa-file-excel"></i> รายงาน</button>
+        <div style="text-align: right">
+          <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+          <input type="text" pInputText size="50" placeholder="Global Filter"
+            (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:50%">
+        </div>
+      </div>
+    </ng-template>
+    <ng-template pTemplate="header" let-columns>
+      <tr>
+        <th *ngFor="let col of columns" [pSortableColumn]="col.field"
+          [pSortableColumnDisabled]="col.field === 'reserve_status'">
+          <span *ngIf="col.field != 'reserve_status'">
+            {{col.header}}
+            <p-sortIcon [field]="col.field" ariaLabel="Activate to sort"
+              ariaLabelDesc="Activate to sort in descending order" ariaLabelAsc="Activate to sort in ascending order">
+            </p-sortIcon>
+          </span>
+          <p-dropdown *ngIf="col.field == 'reserve_status'" [options]="brands" [style]="{'width':'150px'}"
+            (onChange)="dt.filter($event.value, col.field, 'equals')"></p-dropdown>
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-record let-columns="columns">
+      <tr>
+        <td *ngFor="let col of columns">
+          <span class="ui-column-title">{{col.header}}</span>
+          <span *ngIf="col.field != 'reserve_status' && col.field != 'totalprice'">
+            {{record[col.field]}}
+          </span>
+          <span *ngIf="col.field == 'totalprice'">
+            {{record[col.field]}} บาท
+          </span>
+          <span *ngIf="col.field == 'reserve_status'">
+            <label *ngIf="record[col.field] == 0">รอชำระเงิน</label>
+            <label *ngIf="record[col.field] == 1">รอตรวจสอบ</label>
+            <label *ngIf="record[col.field] == 2">เสร็จสมบูรณ์</label>
+          </span>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>

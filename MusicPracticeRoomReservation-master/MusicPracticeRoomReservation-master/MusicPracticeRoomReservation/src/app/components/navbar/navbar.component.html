@@ -1,0 +1,97 @@
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+  <div class="container">
+    <!-- navbar brand -->
+    <a class="navbar-brand" href="#">88BOYMUSIC STUDIO</a>
+    <!-- ปุ่มเปิด menu ตอน responsive navbar -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+      aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <!-- menu navbar -->
+    <!-- befor login -->
+    <div class="collapse navbar-collapse" id="navbarsExampleDefault" *ngIf="!loginstatus">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item " data-toggle="collapse" data-target=".navbar-collapse.show">
+          <a class="nav-link" routerLink="/home" ><i class="fas fa-home"></i>หน้าหลัก <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
+          <a class="nav-link" routerLink="/reserveroom"><i class="fas fa-book"></i>จองห้องซ้อมดนตรี</a>
+        </li>
+        <li class="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
+          <a class="nav-link" routerLink="/signup"><i class="fas fa-pencil-alt"></i> สมัครสมาชิก</a>
+        </li>
+        <li class="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
+          <a class="nav-link" routerLink="/login"><i class="fas fa-sign-in-alt"></i> เข้าสู่ระบบ</a>
+        </li>
+      </ul>
+    </div>
+    <!-- user login -->
+    <div class="collapse navbar-collapse" id="navbarsExampleDefault" *ngIf="loginstatus =='m'">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item " data-toggle="collapse" data-target=".navbar-collapse.show">
+            <a class="nav-link" routerLink="/home"><i class="fas fa-home"></i> หน้าหลัก <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
+            <a class="nav-link" routerLink="/reserveroom"><i class="fas fa-book"></i> จองห้องซ้อมดนตรี</a>
+          </li>
+          <li class="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
+            <a class="nav-link" routerLink="/reservation"><i class="fas fa-calendar-alt"></i> สถานะการจอง</a>
+          </li>
+          <li class="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
+            <a class="nav-link" routerLink="/record"><i class="far fa-folder-open"></i> ประวัติการจอง</a>
+          </li>
+          <li class="nav-item dropdown" data-toggle="collapse" data-target=".navbar-collapse.show">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              <i class="fas fa-user"></i> {{username}}
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" routerLink="/profile/editprofile"><i class="far fa-id-badge"></i> ข้อมูลส่วนตัว</a>
+              <a class="dropdown-item" (click)="logOut()"><i class="fas fa-door-open"></i> ออกจากระบบ</a>
+              <!-- <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#">Something else here</a> -->
+            </div>
+          </li>
+        </ul>
+      </div>
+      <!-- admin -->
+      <div class="collapse navbar-collapse" id="navbarsExampleDefault" *ngIf="loginstatus =='a'">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item " data-toggle="collapse" data-target=".navbar-collapse.show">
+              <a class="nav-link" routerLink="/home"><i class="fas fa-home"></i> หน้าหลัก <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item dropdown" data-toggle="collapse" data-target=".navbar-collapse.show">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-tasks"></i> จัดการห้องซ้อมดนตรี
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" routerLink="/reserveroom"><i class="far fa-eye"></i> สถานะการจอง</a>
+                <a class="dropdown-item" routerLink="/manageroom"><i class="fas fa-pen-square"></i> แก้ไขห้องซ้อมดนตรี</a>
+              </div>
+            </li>
+            <!-- <li class="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
+              <a class="nav-link" routerLink="/manageroom"><i class="fas fa-tasks"></i> ManageRoom</a>
+            </li> -->
+            <li class="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
+              <a class="nav-link" routerLink="/reservation"><i class="fas fa-calendar-alt"></i> สถานะการจองของผู้ใช้</a>
+            </li>
+            <li class="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
+              <a class="nav-link" routerLink="/record"><i class="far fa-folder-open"></i> ประวัติการจองของผู้ใช้</a>
+            </li>
+            <li class="nav-item dropdown" data-toggle="collapse" data-target=".navbar-collapse.show">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-user"></i> Admin
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item"routerLink="/manageuser"><i class="far fa-id-badge"></i>  จัดการผู้ใช้งาน</a>
+                <a class="dropdown-item" (click)="logOut()"><i class="fas fa-door-open"></i> ออกจากระบบ</a>
+                <!-- <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">Something else here</a> -->
+              </div>
+            </li>
+          </ul>
+        </div>
+  </div>
+</nav>

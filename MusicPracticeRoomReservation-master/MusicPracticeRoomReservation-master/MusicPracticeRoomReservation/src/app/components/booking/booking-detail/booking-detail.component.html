@@ -1,0 +1,105 @@
+<div class="container" *ngIf="room && !back">
+  <div class="row">
+    <div class="col-12 col-sm-12 col-md-6 col-lg-6 galleryImages">
+      <ngx-gallery [options]="galleryOptions" [images]="galleryImages"></ngx-gallery>
+      <!-- <h1>Detail Side</h1> -->
+    </div>
+    <div class="col-12 col-sm-12 col-md-6 col-lg-6 reserve-detail">
+      <h1>{{room.name}}</h1>
+      <h4> {{room.detail}}</h4>
+      <br><br>
+      <h2>{{room.price}} (บาท)</h2>
+      <hr>
+      <h3>เครื่องดนตรี : {{room.mus_instrument}}</h3>
+      <hr>
+      <button type="button" class="btn btn-success btn-lg" (click)="openModal(lgModal.show())" *ngIf="user_role != 'a'"><i class="fas fa-book"></i> จองห้องซ้อม</button>
+    </div>
+  </div>
+  <hr>
+  <div class="row">
+    <div class="col-12 col-lg-6 col-md-6 col-sm-12">
+      <h1>ตารางเวลา</h1>
+      <ul class="list-group">
+        <li *ngFor="let item of timeschedule" class="list-group-item d-flex justify-content-between align-items-center">
+          {{item}}
+          <span *ngFor="let booked of bookedtime_bysystem" class="badge badge-danger badge-pill">
+            <div
+              *ngIf="item == booked">
+              จองเเล้ว
+            </div>
+          </span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- <ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Modal</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    This is a modal.
+  </div>
+</ng-template> -->
+<div bsModal #lgModal="bs-modal" (onHidden)="onHidden()" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dialog-sizes-name1">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 id="dialog-sizes-name1" class="modal-title pull-left">เลือกวันที่เเละเวลาที่ต้องการจอง</h4>
+        <button type="button" class="close pull-right" (click)="lgModal.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body container ">
+        <div class="col-12">
+          <form #f="ngForm">
+            <div class="form-group row">
+              <label for="reservetime" class="col-4 col-form-label">เลือกเวลา : </label>
+              <div class="col-8">
+                <!-- <input type="password" class="form-control" id="inputPassword" placeholder="Password"> -->
+                <timepicker [(ngModel)]="mytime"  (ngModelChange)="onTimeChange($event)" name="reservetime" [showMeridian]="ismeridian" [min]="minTime"
+                  [max]="maxTime" [hourStep]=1 [minuteStep]=0  ></timepicker>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="hours" class="col-4 col-form-label">เลือกจำนวน (ชม.) : </label>
+              <div class="col-8">
+                <select class="form-control input-lg" name="hours" [ngModel]="defualtHours" (ngModelChange)="onHoursSelect($event)">
+                  <option value=1>1 ชม.</option>
+                  <option value=2>2 ชม.</option>
+                  <option value=3>3 ชม.</option>
+                  <option value=4>4 ชม.</option>
+                </select>
+              </div>
+            </div>
+            <hr>
+            <h4> รายละเอียดการจอง</h4>
+            <div class="booked-detail row">
+              <div class="col-sm-12 col-md-6 col-lg-6">
+                ห้องที่จอง : <label *ngIf="room">{{room.name}}</label>
+              </div>
+              <div class="col-sm-12 col-md-6 col-lg-6">
+                เวลาที่จอง : <label> {{totaltime}} น.</label>
+              </div>
+              <div class="col-12">
+                ราคา : <label>{{totalprice}}</label>
+              </div>
+            </div>
+            <hr>
+            <div *ngIf="foundTime == 1" class="alert alert-danger" role="alert">
+              เวลาที่คุณเลือกมีคนจองไว้เเล้ว
+            </div>
+            <div *ngIf="timeOverflow == 1" class="alert alert-danger" role="alert">
+              คุณจองเวลาเกิน เนื่องจากร้านปิด 21.30 น.
+            </div>
+            <button type="button" class="btn btn-success btn-lg col-12" [disabled]="!bookedDetail" (click)="reserveRoom()">ยืนยันการจอง</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

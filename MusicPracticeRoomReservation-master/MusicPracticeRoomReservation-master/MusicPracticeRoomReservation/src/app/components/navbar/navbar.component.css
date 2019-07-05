@@ -1,0 +1,8 @@
+@media screen and (max-width: 768px) {
+    .navbar-brand {
+        font-size: 18px;
+    }
+}
+a:hover { 
+    cursor: pointer;
+ }

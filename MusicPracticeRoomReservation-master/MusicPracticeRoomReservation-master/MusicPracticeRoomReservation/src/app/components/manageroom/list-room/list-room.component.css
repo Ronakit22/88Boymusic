@@ -1,0 +1,42 @@
+.inner-banner-image{
+    padding: 12%;
+    width: 80%;
+    margin: auto;
+    font-weight: bold;
+}
+.banner_content{
+    color: white;
+    text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;
+}
+.card{
+    margin-top: 20px;
+}
+.card :hover {
+    cursor: pointer;
+}
+.card-img{
+    height: 80vh;
+}
+.bkt-img-content{
+    background-color: black;
+    text-align: center;
+    padding: 40px;
+    margin-top: 200px;  
+    color: white;
+    -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+    box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+
+}
+@media screen and (max-width: 768px) {
+    .card-img {
+        height: 100%;
+        /* background-size: cover; */
+    }
+    .bkt-img-content{
+        margin-top: 5vh; ;
+    }
+}
+a {
+    color: white;
+}

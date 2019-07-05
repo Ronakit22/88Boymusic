@@ -1,0 +1,47 @@
+<br>
+<div class="container">
+  <div class="row">
+    <div class="col-4">
+      <button type="button" class="btn btn-light" (click)="btnBack()">
+        <i class="fas fa-chevron-left"></i><i class="fas fa-chevron-left"></i>
+        กลับ
+      </button>
+    </div>
+    <div class="col-6 " *ngIf="!back">
+      <form class="form-inline">
+        <div class="form-group">
+          <div class="input-group">
+            <input type="text" class="form-control" #dp="bsDatepicker" bsDatepicker
+              (bsValueChange)="onValueChange($event)" [bsValue]="bsValue" [minDate]="minDate" [maxDate]="maxDate">
+            <div class="input-group-append">
+              <button class="btn btn-outline-secondary fa fa-calendar" (click)="dp.toggle()"
+                [attr.aria-expanded]="dp.isOpen"></button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="col-2">
+    </div>
+  </div>
+</div>
+<hr>
+
+<div class="container" *ngIf="back">
+  <div *ngFor="let bt of rooms; let i=index" class="card bg-dark text-white">
+    <a (click)="onSelectRoom(bt,banner_room[i])">
+      <img src={{banner_room[i]}} class="card-img">
+      <div class="card-img-overlay ">
+        <div class="col-md-4 offset-md-4">
+          <div class="bkt-img-content align-middle ">
+            <h5 class="card-title">{{bt.name}}</h5>
+            <p class="card-text">{{bt.price}}</p>
+          </div>
+        </div>
+      </div>
+    </a>
+  </div>
+  <br>
+</div>
+
+<app-booking-detail (insertComplete)="btnBack()" [room]="select_room" [back]="back" [bsValue]="bsValue" [banner]="select_bannerroom"></app-booking-detail>

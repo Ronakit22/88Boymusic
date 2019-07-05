@@ -1,0 +1,13 @@
+.btn-secondary{
+    background-color: whitesmoke;
+    color: black;
+}
+.btn-secondary:hover{
+    background-color: #7b8799;
+}
+input.ng-invalid.ng-touched {
+    border: solid 1px red;
+}
+.help-block{
+    color: red;
+}
